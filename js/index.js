@@ -1,6 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch("http://localhost:3000/films")
+  
     .then(response => response.json())
     .then(films => { displayMovie(films[9]); })
     .catch(error => { console.error("Error fetching movie data:", error); });
@@ -83,16 +84,13 @@ function buyTicket(film) {
     alert("Sorry, this showing is sold out!");
   }
 }
-function displayMovies(movies) {
-  const filmsList = document.getElementById("films");
-  filmsList.innerHTML = ""; // Clear placeholder or old content
-
-  movies.forEach(film => {
-    const li = document.createElement("li");
-    li.classList.add("film", "item");
+function displayMovie(films){
+  const filmList=document.getElementById("films");
+  filmList.innerHTML="";
+  films.forEach(film=>{
+    const li=document.createElement("li");
+      li.classList.add("film", "item");
     li.textContent = film.title;
-
-    // Delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.style.marginLeft = "10px";
@@ -102,24 +100,7 @@ function displayMovies(movies) {
     deleteBtn.style.cursor = "pointer";
     deleteBtn.style.borderRadius = "5px";
     deleteBtn.style.padding = "3px 6px";
+  })
 
-    // Handle delete click
-    deleteBtn.addEventListener("click", () => {
-      // 1. Remove from frontend
-      li.remove();
-
-      // 2. Delete on server
-      fetch(`http://localhost:3000/films/${film.id}`, {
-        method: "DELETE"
-      })
-      .then(response => {
-        if (!response.ok) throw new Error("Failed to delete film");
-        console.log(`Deleted film with id: ${film.id}`);
-      })
-      .catch(error => console.error("Error deleting film:", error));
-    });
-
-    li.appendChild(deleteBtn);
-    filmsList.appendChild(li);
-  });
 }
+
