@@ -84,23 +84,13 @@ function buyTicket(film) {
     alert("Sorry, this showing is sold out!");
   }
 }
-function displayMovie(films){
-  const filmList=document.getElementById("films");
-  filmList.innerHTML="";
-  films.forEach(film=>{
-    const li=document.createElement("li");
-      li.classList.add("film", "item");
-    li.textContent = film.title;
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.style.marginLeft = "10px";
-    deleteBtn.style.color = "white";
-    deleteBtn.style.background = "red";
-    deleteBtn.style.border = "none";
-    deleteBtn.style.cursor = "pointer";
-    deleteBtn.style.borderRadius = "5px";
-    deleteBtn.style.padding = "3px 6px";
+function deleteFilm(filmId, liElement) {
+  fetch(`http://localhost:3000/films/${filmId}`, {
+    method: "DELETE"
   })
-
+    .then(() => {
+      liElement.remove();
+      console.log(`Film ${filmId} deleted`);
+    })
+    .catch(error => console.error("Error deleting film:", error));
 }
-

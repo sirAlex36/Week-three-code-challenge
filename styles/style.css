@@ -21,10 +21,10 @@ background-color: grey;
   background-color: #ddd;
 }
 .container {
-  display: flex;          /* enables side-by-side layout */
-  gap: 20px;              /* spacing between the two sections */
-  align-items: flex-start; /* keep items aligned at the top */
+  display: flex;          
+  gap: 20px;              
+  align-items: flex-start; 
 }
 #movie-details {
-  flex: 1; /* takes the remaining space */
+  flex: 1; 
 }
